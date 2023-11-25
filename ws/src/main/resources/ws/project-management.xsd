@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.example.dev/springws"
+    targetNamespace="http://www.example.dev/springws"
+    elementFormDefault="qualified">
+
+    <xs:element name="getProjectRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int" />
+                <xs:element name="withEmployees" type="xs:boolean" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getProjectResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="project" type="tns:projectDto" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getProjectsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="withEmployees" type="xs:boolean" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getProjectsResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="projects" type="tns:projectDto" minOccurs="0" maxOccurs="unbounded" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="getEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int" />
+                <xs:element name="withProjects" type="xs:boolean" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEmployeeResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="employee" type="tns:employeeDto" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEmployeesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="withProjects" type="xs:boolean" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEmployeesResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="employees" type="tns:employeeDto" minOccurs="0" maxOccurs="unbounded" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+    <xs:element name="attachToProjectRequest">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="projectId" type="xs:int" />
+                 <xs:element name="employeeId" type="xs:int" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+    <xs:element name="attachToProjectResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="status" type="xs:boolean" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+    <xs:element name="detachFromProjectRequest">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="projectId" type="xs:int" />
+                 <xs:element name="employeeId" type="xs:int" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+    <xs:element name="detachFromProjectResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="status" type="xs:boolean" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addProjectRequest">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="project" type="tns:projectDto" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addProjectResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="project" type="tns:projectDto" />
+             </xs:sequence>
+         </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="projectDto">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int" />
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="employees" type="tns:employeeDto" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="employeeDto">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int" />
+            <xs:element name="firstName" type="xs:string" />
+            <xs:element name="lastName" type="xs:string" />
+            <xs:element name="position" type="tns:positionDto" />
+            <xs:element name="projects" type="tns:projectDto" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="positionDto">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MANAGER" />
+            <xs:enumeration value="DEVELOPER" />
+            <xs:enumeration value="QA" />
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

@@ -1,0 +1,52 @@
+type Query {
+    project(id: ID!): Project
+    projects: [Project]
+    employee(id: ID!): Employee
+    employees: [Employee]
+}
+
+type Mutation {
+    attachToProject(projectId: ID!, employeeId: ID!): Boolean
+    detachFromProject(projectId: ID!, employeeId: ID!): Boolean
+    addProject(project: ProjectInput!): Project
+}
+
+type Project {
+    id: ID!
+    name: String!
+    employees: [EmployeeLight]
+}
+
+# This type is introduced because bidirectional relations in Project <-> Employee are used
+# in the schema and we wish to avoid these relations on the schema view
+# See also `EmployeeLight` definition
+type ProjectLight {
+    id: ID!
+    name: String!
+} 
+
+type Employee {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    position: Position!
+    projects: [ProjectLight]
+}
+
+type EmployeeLight {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    position: Position!
+}
+
+input ProjectInput {
+    id: ID!
+    name: String!
+}
+
+enum Position {
+    Manager
+    Developer
+    QA
+}

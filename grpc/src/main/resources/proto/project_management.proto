@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package demonet;
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "dev.example.demonet.grpc.model";
+option java_multiple_files = true;
+
+message ProjectDto {
+    int32 id = 1;
+    string name = 2;
+    repeated EmployeeDto employees = 3;
+}
+
+message EmployeeDto {
+    int32 id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    PositionDto position = 4;
+    repeated ProjectDto projects = 5;
+}
+
+enum PositionDto {
+    MANAGER = 0;
+    DEVELOPER = 1;
+    QA = 2;
+}
+
+message GetProjectRequest {
+    int32 id = 1;
+    bool withEmployees = 2;
+}
+
+message GetProjectsRequest {
+    bool withEmployees = 1;
+}
+
+message GetEmployeeRequest {
+    int32 id = 1;
+    bool withProjects = 2;
+}
+
+message GetEmployeesRequest {
+    bool withProjects = 1;
+}
+
+message ProjectManagementRequest {
+    int32 projectId = 1;
+    int32 employeeId = 2;
+}
+
+message AddProjectRequest {
+    int32 id = 1;
+    string name = 2;
+}
+
+service ProjectManagementService {
+    rpc getProject(GetProjectRequest) returns (ProjectDto);
+    rpc getProjects(GetProjectsRequest) returns (stream ProjectDto);
+    rpc getEmployee(GetEmployeeRequest) returns (EmployeeDto);
+    rpc getEmployees(GetEmployeesRequest) returns (stream EmployeeDto);
+    rpc attachToProject(ProjectManagementRequest) returns (google.protobuf.BoolValue);
+    rpc detachFromProject(ProjectManagementRequest) returns (google.protobuf.BoolValue);
+    rpc addProject(AddProjectRequest) returns (ProjectDto);
+}
+

@@ -1,0 +1,12 @@
+query {
+  projects {
+    id
+    name
+    employees {
+      id
+      firstName
+      lastName
+      position
+    }
+  }
+}

@@ -1,0 +1,12 @@
+query ($id: ID!) {
+    project(id: $id) {
+        id
+        name
+        employees {
+            id
+            firstName
+            lastName
+            position
+        }
+    }
+}

@@ -1,0 +1,6 @@
+mutation ($id: ID!, $name: String!) {
+  addProject(project: {id: $id, name: $name}) {
+    id
+    name
+  }
+}
