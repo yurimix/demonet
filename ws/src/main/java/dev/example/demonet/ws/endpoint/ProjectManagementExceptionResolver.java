@@ -7,7 +7,7 @@ import org.springframework.ws.soap.SoapFault;
 import org.springframework.ws.soap.SoapFaultDetail;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 
-import dev.example.demonet.service.exception.DuplicateProjectException;
+import dev.example.demonet.service.exception.EntityDuplicateException;
 import dev.example.demonet.service.exception.EntityNotFoundException;
 import dev.example.demonet.service.exception.ProjectManagementException;
 
@@ -24,7 +24,7 @@ public class ProjectManagementExceptionResolver extends SoapFaultMappingExceptio
             if (ex instanceof EntityNotFoundException) {
                 detail.addFaultDetailElement(CODE).addText(HttpStatus.NOT_FOUND.name());
             }
-            if (ex instanceof DuplicateProjectException) {
+            if (ex instanceof EntityDuplicateException) {
                 detail.addFaultDetailElement(CODE).addText(HttpStatus.BAD_REQUEST.name());
             }
         }

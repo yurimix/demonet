@@ -7,7 +7,7 @@ import org.springframework.graphql.execution.ErrorType;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
-import dev.example.demonet.service.exception.DuplicateProjectException;
+import dev.example.demonet.service.exception.EntityDuplicateException;
 import dev.example.demonet.service.exception.EntityNotFoundException;
 import dev.example.demonet.service.exception.ProjectManagementException;
 import graphql.GraphQLError;
@@ -26,7 +26,7 @@ public class GraphqlExceptionResolver extends DataFetcherExceptionResolverAdapte
             if (ex instanceof EntityNotFoundException) {
                 builder.errorType(ErrorType.NOT_FOUND);
             }
-            if (ex instanceof DuplicateProjectException) {
+            if (ex instanceof EntityDuplicateException) {
                 builder.errorType(ErrorType.BAD_REQUEST);
             }
             return builder.build();

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import dev.example.demonet.service.exception.DuplicateProjectException;
+import dev.example.demonet.service.exception.EntityDuplicateException;
 import dev.example.demonet.service.exception.EntityNotFoundException;
 
 @ControllerAdvice
@@ -25,7 +25,7 @@ public class ProjectManagementExceptionHandler extends ResponseEntityExceptionHa
         return handleException(ex, request, NOT_FOUND);
     }
 
-    @ExceptionHandler({ DuplicateProjectException.class })
+    @ExceptionHandler({ EntityDuplicateException.class })
     public ResponseEntity<Object> handleDuplicateProjectException(Exception ex, WebRequest request) {
         return handleException(ex, request, BAD_REQUEST);
     }

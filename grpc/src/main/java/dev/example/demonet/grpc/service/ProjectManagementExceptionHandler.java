@@ -7,7 +7,7 @@ import static io.grpc.protobuf.StatusProto.toStatusRuntimeException;
 import com.google.rpc.Code;
 import com.google.rpc.Status;
 
-import dev.example.demonet.service.exception.DuplicateProjectException;
+import dev.example.demonet.service.exception.EntityDuplicateException;
 import dev.example.demonet.service.exception.EntityNotFoundException;
 import dev.example.demonet.service.exception.ProjectManagementException;
 import io.grpc.StatusRuntimeException;
@@ -22,8 +22,8 @@ public class ProjectManagementExceptionHandler {
         return toStatusRuntimeException(getExceptionStatus(cause, NOT_FOUND));
     }
 
-    @GrpcExceptionHandler(DuplicateProjectException.class)
-    public StatusRuntimeException handleDuplicateProjectException(DuplicateProjectException cause) {
+    @GrpcExceptionHandler(EntityDuplicateException.class)
+    public StatusRuntimeException handleDuplicateProjectException(EntityDuplicateException cause) {
         return toStatusRuntimeException(getExceptionStatus(cause, ALREADY_EXISTS));
     }
 

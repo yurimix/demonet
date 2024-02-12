@@ -13,7 +13,7 @@ import org.springframework.graphql.execution.ErrorType;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
 import dev.example.demonet.service.ProjectManagementService;
-import dev.example.demonet.service.exception.DuplicateProjectException;
+import dev.example.demonet.service.exception.EntityDuplicateException;
 import dev.example.demonet.service.exception.ProjectNotFoundException;
 import dev.example.demonet.service.model.Employee;
 import dev.example.demonet.service.model.Project;
@@ -98,7 +98,7 @@ public class ProjectManagementGraphqlControllerTest {
 
     @Test
     public void addDuplicateProjectTest() {
-        doThrow(DuplicateProjectException.class).when(service).addProject(project);
+        doThrow(EntityDuplicateException.class).when(service).addProject(project);
 
         this.graphQlTester.documentName("addProject").variable("id", project.id()).variable("name", project.name())
                 .execute().errors().expect(e -> e.getErrorType().equals(ErrorType.BAD_REQUEST));

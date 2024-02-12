@@ -70,7 +70,7 @@ public class ProjectManagementRestControllerTest {
 
     @Test
     public void handleProjectNotFoundException() {
-        doThrow(new ProjectNotFoundException("ERROR")).when(service).getProject(anyInt(), anyBoolean());
+        doThrow(new ProjectNotFoundException(10)).when(service).getProject(anyInt(), anyBoolean());
         var p = restTemplate.getForEntity(getUrl("/projects/10"), ProjectDto.class);
         verify(service, times(1)).getProject(10, false);
         assertEquals(org.springframework.http.HttpStatus.NOT_FOUND, p.getStatusCode());

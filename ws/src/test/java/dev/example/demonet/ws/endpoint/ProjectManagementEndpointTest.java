@@ -75,7 +75,7 @@ class ProjectManagementEndpointTest {
 
     @Test
     void getProjectNotFoundTest() throws IOException {
-        doThrow(new ProjectNotFoundException("TEST")).when(service).getProject(1);
+        doThrow(new ProjectNotFoundException(1)).when(service).getProject(1);
 
         StringSource request = new StringSource("""
                 <gs:getProjectRequest xmlns:gs="%s">
@@ -83,7 +83,7 @@ class ProjectManagementEndpointTest {
                     <gs:withEmployees>true</gs:withEmployees>
                 </gs:getProjectRequest>""".formatted(NAMESPACE));
 
-        client.sendRequest(withPayload(request)).andExpect(serverOrReceiverFault("TEST"))
+        client.sendRequest(withPayload(request)).andExpect(serverOrReceiverFault("Project not found"))
                 .andExpect(xpath("/SOAP-ENV:Fault/detail/code", NAMESPACE_MAPPING).evaluatesTo("NOT_FOUND"));
     }
 
