@@ -11,7 +11,6 @@ import java.util.function.ToIntFunction;
 import org.springframework.stereotype.Service;
 
 import dev.example.demonet.service.ProjectManagementService;
-import dev.example.demonet.service.exception.EntityException;
 import dev.example.demonet.service.exception.EmployeeDuplicateException;
 import dev.example.demonet.service.exception.EmployeeNotFoundException;
 import dev.example.demonet.service.exception.ProjectDuplicateException;

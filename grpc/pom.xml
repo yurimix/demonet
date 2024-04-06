@@ -17,7 +17,7 @@
     <description>GRPC demo project for Spring Boot</description>
 
     <properties>
-        <io.grpc.version>1.59.0</io.grpc.version>
+        <io.grpc.version>1.62.2</io.grpc.version>
         <annotations-api.version>6.0.53</annotations-api.version>
         <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
         <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
@@ -92,7 +92,7 @@
                         io.grpc:protoc-gen-grpc-java:1.22.1:exe:${os.detected.classifier}
                     </pluginArtifact>
                     <protoSourceRoot>
-                        ${basedir}/src/main/resources/proto/
+                        ${basedir}/src/main/resources/
                     </protoSourceRoot>
                 </configuration>
                 <executions>
